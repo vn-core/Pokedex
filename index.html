@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/pokeball-icon.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <script defer src="./assets/js/script.js"></script>
+    <title>Pokedex</title>
+</head>
+<body>
+    <div class="container">
+
+
+<!-- TARJETA POKEDEX -->
+     
+        <div class="pokedex">
+            <img class="pokemonimg" src="#" alt="pokemonimg">
+            <img src="./assets/img/rotomdex2.png" alt="pokedeximg" class="pokedeximg">
+        
+            <h1 class="data">
+                <span class="pkmnnumber"></span> 
+                <span class="pkmnname"></span>
+            </h1>
+
+            <form>
+                <input 
+                type="search" 
+                class="inputsearch" 
+                placeholder="Name or Number"
+                required
+                />
+            </form>
+
+            <div class="buttons">
+                <button class="btn-prev">&lt; PREV</button>
+                <button class="btn-next">NEXT ></button>
+
+        </div>
+                
+
+            </div>
+
+ <!-- TARJETA CON DATOS -->
+
+ <div class="datos">
+    <h2>Información del Pokémon</h2>
+
+    <!-- Contenedor de tipos con imágenes -->
+    <div class="pkmn-types">
+        <img class="pkmntype-img" src="" alt="Tipo del Pokémon">
+    </div>
+
+    <p><strong>Altura:</strong> <span class="pkmnheight"></span> m</p>
+    <p><strong>Peso:</strong> <span class="pkmnweight"></span> kg</p>
+    <p><strong>Descripción:</strong> <span class="pkmndescription"></span></p>
+
+    <h3>Estadísticas:</h3>
+    <div class="pkmnstats"></div>
+</div>
+        
+            
+        </div>
+        
+</body>
+</html>
