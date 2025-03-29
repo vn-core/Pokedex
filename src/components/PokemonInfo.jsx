@@ -44,8 +44,12 @@ const PokemonInfo = ({ pokemon }) => {
                     <img
                         key={index}
                         className="pkmntype-img"
-                        src={`/assets/img/${typeObj.type.name}.png`}
+                        src={`./assets/img/${typeObj.type.name}.png`}
                         alt={typeObj.type.name}
+                        onError={(e) => {
+                            console.error(`Error loading type image: ${typeObj.type.name}`);
+                            e.target.style.display = 'none';
+                        }}
                     />
                 ))}
             </div>

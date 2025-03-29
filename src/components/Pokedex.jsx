@@ -69,9 +69,21 @@ const Pokedex = () => {
                         className="pokemonimg" 
                         src={pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default}
                         alt={pokemonData.name}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `${import.meta.env.BASE_URL}assets/img/pokeball-icon.png`;
+                        }}
                     />
                 )}
-                <img src="/assets/img/rotomdex2.png" alt="pokedeximg" className="pokedeximg" />
+                <img 
+                    src="./assets/img/rotomdex2.png" 
+                    alt="pokedeximg" 
+                    className="pokedeximg"
+                    onError={(e) => {
+                        console.error('Error loading Pokedex image');
+                        e.target.style.display = 'none';
+                    }}
+                />
                 
                 <h1 className="data">
                     <span className="pkmnnumber">{pokemonData?.id}</span>
