@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: left;
+    align-items: center;
+    font-family: 'Oxanium', cursive;
+}
+
+.pokedex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30em;
+    height: 35em;
+    position: relative;
+    object-fit: contain;
+    margin-left: 2em;
+}
+
+.pokemonimg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    object-fit: contain;
+    width: 7em;
+    height: 8em;
+    z-index: 3;
+    padding-top: 8em;
+}
+
+.pokedeximg {
+    position: absolute;
+    width: 35em;
+    height: 35em;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.data {
+    position: absolute;
+    font-size: 1.4em;
+    margin: 0;
+    padding-bottom: 7em;
+    padding-right: 5em;
+    border: 1em;
+    color: rgb(28, 68, 105);
+    z-index: 2;
+}
+
+.pkmnnumber {
+    color: rgb(78, 146, 210);
+}
+
+.inputsearch {
+    position: absolute;
+    margin-top: 13.1em;
+    margin-left: -6em;
+    z-index: 4;
+    border: solid rgb(28, 68, 105);
+    background-color: rgb(206, 233, 255);
+}
+
+.buttons {
+    position: absolute;
+    z-index: 3;
+    width: 12em;
+    height: 2em;
+    display: flex;
+    gap: 1em;
+    padding-top: 27em;
+}
+
+button {
+    width: 50%;
+    padding: 4%;
+    border: 3px solid rgb(28, 68, 105);
+    border-radius: 5px;
+    color: rgb(28, 68, 105);
+    background-image: linear-gradient(to top, rgb(113, 179, 241), rgb(240, 251, 252));
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    box-shadow: 0 0 10px 0 rgb(87, 158, 224) inset, 0 0 6px 2px rgb(98, 179, 255);
+    border: 2px solid rgb(133, 200, 255);
+    color: rgb(133, 200, 255);
+} 
