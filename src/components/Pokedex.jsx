@@ -6,17 +6,33 @@ const Pokedex = () => {
     const [currentPokemonId, setCurrentPokemonId] = useState(1);
     const [pokemonData, setPokemonData] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const totalPokemons = 649;
 
     const fetchPokemonData = async (pokemon) => {
+        setIsLoading(true);
+        setError(null);
         try {
             const [pokemonResponse, speciesResponse] = await Promise.all([
-                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`),
-                fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }),
+                fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
             ]);
 
             if (!pokemonResponse.ok || !speciesResponse.ok) {
-                throw new Error('Pokémon no encontrado');
+                throw new Error('Error al cargar el Pokémon');
             }
 
             const [pokemonData, speciesData] = await Promise.all([
@@ -34,6 +50,10 @@ const Pokedex = () => {
             });
         } catch (error) {
             console.error('Error al cargar el Pokémon:', error);
+            setError('Error al cargar el Pokémon. Por favor, intenta de nuevo.');
+            setPokemonData(null);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -64,14 +84,19 @@ const Pokedex = () => {
     return (
         <div className="container">
             <div className="pokedex">
-                {pokemonData && (
+                {isLoading ? (
+                    <div className="loading">Cargando...</div>
+                ) : error ? (
+                    <div className="error">{error}</div>
+                ) : pokemonData && (
                     <img 
                         className="pokemonimg" 
                         src={pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default}
                         alt={pokemonData.name}
                         onError={(e) => {
+                            console.error('Error loading Pokemon image');
                             e.target.onerror = null;
-                            e.target.src = `${import.meta.env.BASE_URL}assets/img/pokeball-icon.png`;
+                            e.target.src = './assets/img/pokeball-icon.png';
                         }}
                     />
                 )}
@@ -88,7 +113,7 @@ const Pokedex = () => {
                 <h1 className="data">
                     <span className="pkmnnumber">{pokemonData?.id}</span>
                     <span className="pkmnname">
-                        {pokemonData?.name.charAt(0).toUpperCase() + pokemonData?.name.slice(1)}
+                        {pokemonData?.name && pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}
                     </span>
                 </h1>
 
@@ -109,7 +134,7 @@ const Pokedex = () => {
                 </div>
             </div>
 
-            {pokemonData && <PokemonInfo pokemon={pokemonData} />}
+            {!isLoading && !error && pokemonData && <PokemonInfo pokemon={pokemonData} />}
         </div>
     );
 };

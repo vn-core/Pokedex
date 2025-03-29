@@ -89,4 +89,18 @@ button:hover {
     box-shadow: 0 0 10px 0 rgb(87, 158, 224) inset, 0 0 6px 2px rgb(98, 179, 255);
     border: 2px solid rgb(133, 200, 255);
     color: rgb(133, 200, 255);
-} 
+}
+
+.loading, .error {
+    position: absolute;
+    z-index: 3;
+    padding-top: 8em;
+    color: rgb(28, 68, 105);
+    font-weight: bold;
+    text-align: center;
+}
+
+.error {
+    color: #F08030;
+    max-width: 200px;
+}
