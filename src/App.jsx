@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   return (
     <div style={{
-      backgroundImage: `url(./assets/img/new_wallpaper.png)`,
+      backgroundImage: `url(/assets/img/new_wallpaper.png)`,
       backgroundSize: '35em',
       backgroundRepeat: 'repeat',
       minHeight: '100vh',

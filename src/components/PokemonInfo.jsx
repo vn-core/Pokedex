@@ -40,18 +40,22 @@ const PokemonInfo = ({ pokemon }) => {
             <h2>Información del Pokémon</h2>
 
             <div className="pkmn-types">
-                {pokemon.types.map((typeObj, index) => (
-                    <img
-                        key={index}
-                        className="pkmntype-img"
-                        src={`./assets/img/${typeObj.type.name}.png`}
-                        alt={typeObj.type.name}
-                        onError={(e) => {
-                            console.error(`Error loading type image: ${typeObj.type.name}`);
-                            e.target.style.display = 'none';
-                        }}
-                    />
-                ))}
+                {pokemon.types.map((typeObj, index) => {
+                    const typeName = typeObj.type.name.toLowerCase();
+                    console.log('Loading type image for:', typeName);
+                    return (
+                        <img
+                            key={index}
+                            className="pkmntype-img"
+                            src={`/assets/img/${typeName}.png`}
+                            alt={typeName}
+                            onError={(e) => {
+                                console.error(`Error loading type image: ${typeName}`);
+                                e.target.style.display = 'none';
+                            }}
+                        />
+                    );
+                })}
             </div>
 
             <p><strong>Altura:</strong> <span>{pokemon.height / 10} m</span></p>

@@ -14,21 +14,10 @@ const Pokedex = () => {
         setIsLoading(true);
         setError(null);
         try {
+            console.log('Fetching pokemon data for:', pokemon);
             const [pokemonResponse, speciesResponse] = await Promise.all([
-                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                }),
-                fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                })
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`),
+                fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
             ]);
 
             if (!pokemonResponse.ok || !speciesResponse.ok) {
@@ -40,13 +29,20 @@ const Pokedex = () => {
                 speciesResponse.json()
             ]);
 
+            console.log('Pokemon data received:', pokemonData);
+            console.log('Species data received:', speciesData);
+
             const spanishDescription = speciesData.flavor_text_entries.find(
                 entry => entry.language.name === 'es'
             )?.flavor_text || 'Descripción no disponible en español';
 
+            const spriteUrl = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default;
+            console.log('Sprite URL:', spriteUrl);
+
             setPokemonData({
                 ...pokemonData,
-                description: spanishDescription.replace(/\f/g, ' ')
+                description: spanishDescription.replace(/\f/g, ' '),
+                spriteUrl: spriteUrl || 'assets/img/pokeball-icon.png'
             });
         } catch (error) {
             console.error('Error al cargar el Pokémon:', error);
@@ -89,31 +85,33 @@ const Pokedex = () => {
                 ) : error ? (
                     <div className="error">{error}</div>
                 ) : pokemonData && (
-                    <img 
-                        className="pokemonimg" 
-                        src={pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default}
-                        alt={pokemonData.name}
-                        onError={(e) => {
-                            console.error('Error loading Pokemon image');
-                            e.target.onerror = null;
-                            e.target.src = './assets/img/pokeball-icon.png';
-                        }}
-                    />
+                    <>
+                        <img 
+                            className="pokemonimg" 
+                            src={pokemonData.spriteUrl}
+                            alt={pokemonData.name}
+                            onError={(e) => {
+                                console.error('Error loading Pokemon image');
+                                e.target.onerror = null;
+                                e.target.src = '/assets/img/pokeball-icon.png';
+                            }}
+                        />
+                        <img 
+                            src="/assets/img/rotomdex2.png" 
+                            alt="pokedeximg" 
+                            className="pokedeximg"
+                            onError={(e) => {
+                                console.error('Error loading Pokedex image');
+                                e.target.style.display = 'none';
+                            }}
+                        />
+                    </>
                 )}
-                <img 
-                    src="./assets/img/rotomdex2.png" 
-                    alt="pokedeximg" 
-                    className="pokedeximg"
-                    onError={(e) => {
-                        console.error('Error loading Pokedex image');
-                        e.target.style.display = 'none';
-                    }}
-                />
                 
                 <h1 className="data">
-                    <span className="pkmnnumber">{pokemonData?.id}</span>
+                    <span className="pkmnnumber">{pokemonData?.id || '?'}</span>
                     <span className="pkmnname">
-                        {pokemonData?.name && pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}
+                        {pokemonData?.name ? pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1) : '???'}
                     </span>
                 </h1>
 
