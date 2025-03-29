@@ -1,0 +1,61 @@
+.datos {
+    color: white;
+    background-color: rgba(47, 43, 43, 0.9);
+    padding: 2em;
+    border-radius: 15px;
+    margin-left: 2em;
+    width: 25em;
+    height: 30em;
+    border: 5px solid rgb(113, 179, 241);
+    box-shadow: 0 0 15px rgba(113, 179, 241, 0.3);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.datos h2 {
+    color: rgb(113, 179, 241);
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.datos h3 {
+    color: rgb(255, 255, 255);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.datos p {
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+.pkmn-types {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.pkmnstats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.stat {
+    background-color: rgba(113, 179, 241, 0.1);
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid rgb(113, 179, 241);
+}
+
+.pkmndescription {
+    display: block;
+    margin-top: 0.5em;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.pkmntype-img {
+    height: 5em;
+} 

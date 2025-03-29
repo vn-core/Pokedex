@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
+
+body{
+    margin: 0;
+    background-image: url(../img/wallpaper.png);
+    background-size: 35em;
+    background-repeat: repeat;
+    font-family: 'Oxanium', cursive;
+}
+
+.container{
+    display: flex;
+    width: 100vw; /* 100% del ancho de la ventana visible */
+    height: 100vh; /* 100% del alto de la ventana visible */
+    justify-content: left;
+    align-items: center;
+}
+
+.pokedex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30em;
+    height: 35em;
+    position: relative;
+    object-fit: contain;
+    margin-left: 2em;
+   
+
+}
+
+.pokemonimg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Permite posicionar libremente */
+    object-fit: contain;
+    width: 7em;
+    height: 8em; /* Asegúrate de que ocupe todo el contenedor */
+    z-index:3;
+    padding-top: 8em;
+    
+}
+
+.pokedeximg{
+    position: absolute;
+    width: 35em;
+    height: 35em;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.data{
+    position: absolute;
+    font-size: 1.4em;
+    margin: 0%;
+    padding-bottom: 7em;
+    padding-right: 5em;
+    border: 1em;
+    color: rgb(28, 68, 105);
+    z-index: 2;
+}
+
+.pkmnnumber{
+    color: rgb(78, 146, 210);
+}
+
+.inputsearch{
+    position: absolute;
+    margin-top: 13.1em;
+    margin-left: -6em;
+    z-index: 4;
+    border: solid rgb(28, 68, 105);
+    background-color: rgb(206, 233, 255);
+}
+
+.buttons{
+    position: absolute;
+    z-index:3;
+    width: 12em;
+    height: 2em;
+    display: flex;
+    gap: 1em;
+    padding-top: 27em;
+}
+
+button{
+    width: 50%;
+    padding: 4%;
+    border: 3px solid rgb(28, 68, 105);
+    border-radius: 5px;
+    color: rgb(28, 68, 105);
+    background-image: linear-gradient(to top, rgb(113, 179, 241), rgb(240, 251, 252)); 
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+button:hover {
+box-shadow: 0 0 10px 0 rgb(87, 158, 224) inset, 0 0 6px 2px rgb(98, 179, 255);
+border: 2px solid rgb(133, 200, 255);
+color: rgb(133, 200, 255);
+}
+
+.info{
+    background-color: rgb(47, 43, 43);
+    width: 100%;
+    height:34em;
+    margin-right: 3em;
+    margin-left: 3em;
+    border: 5px solid rgb(113, 179, 241);
+}
+
+.datos{
+    color: white;
+    background-color: rgba(47, 43, 43, 0.9);
+    padding: 2em;
+    border-radius: 15px;
+    margin-left: 2em;
+    width: 25em;
+    height: 30em; /* Misma altura que la Pokédex */
+    border: 5px solid rgb(113, 179, 241);
+    box-shadow: 0 0 15px rgba(113, 179, 241, 0.3);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+   
+}
+
+.datos h2 {
+    color: rgb(113, 179, 241);
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.datos h3 {
+    color: rgb(255, 255, 255);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.datos p {
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+.pkmn-types {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.pkmnstats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.pkmnstats p {
+    background-color: rgba(113, 179, 241, 0.1);
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid rgb(113, 179, 241);
+}
+
+.pkmndescription {
+    display: block;
+    margin-top: 0.5em;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.pkmntype-img{
+    height: 5em;
+}
