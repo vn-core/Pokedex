@@ -91,14 +91,42 @@ const updateTypeImages = (types) => {
     });
 };
 
-const updateStats = (stats) => {
+const updateStats = (stats, types) => {
     pokemonStats.innerHTML = '';
+    const firstType = types[0].type.name.toLowerCase();
+    const typeColor = typeColors[firstType] || '#71B3F1';
+
     stats.forEach(statObj => {
         const statName = statObj.stat.name;
         const statValue = statObj.base_stat;
+        
         const statElement = document.createElement('div');
         statElement.classList.add('stat');
-        statElement.innerHTML = `<strong>${capitalizeName(statName)}:</strong> ${statValue}`;
+        
+        const statNameElement = document.createElement('div');
+        statNameElement.classList.add('stat-name');
+        statNameElement.textContent = capitalizeName(statName);
+        statNameElement.style.color = typeColor;
+        
+        const statBarContainer = document.createElement('div');
+        statBarContainer.classList.add('stat-bar-container');
+        
+        const statBar = document.createElement('div');
+        statBar.classList.add('stat-bar');
+        const percentage = (statValue / 255) * 100;
+        statBar.style.width = `${percentage}%`;
+        statBar.style.backgroundColor = typeColor;
+        
+        const statValueElement = document.createElement('div');
+        statValueElement.classList.add('stat-value');
+        statValueElement.textContent = statValue;
+        statValueElement.style.color = typeColor;
+        
+        statBarContainer.appendChild(statBar);
+        statElement.appendChild(statNameElement);
+        statElement.appendChild(statBarContainer);
+        statElement.appendChild(statValueElement);
+        
         pokemonStats.appendChild(statElement);
     });
 };
@@ -167,8 +195,8 @@ const renderPokemon = async (pokemon) => {
             pokemonDescription.innerHTML = 'Descripción no disponible';
         }
 
-        // Actualizar estadísticas
-        updateStats(data.stats);
+        // Actualizar estadísticas con los tipos
+        updateStats(data.stats, data.types);
     } catch (error) {
         console.error('Error al cargar el Pokémon:', error);
         pokemonName.innerHTML = 'Error';

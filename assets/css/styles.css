@@ -125,9 +125,11 @@ color: rgb(133, 200, 255);
 }
 
 .datos h2 {
-    color: rgb(113, 179, 241);
+    color: rgb(255, 255, 255);
     margin-bottom: 1em;
     text-align: center;
+    margin-top: -1rem;	
+
 }
 
 .datos h3 {
@@ -139,27 +141,54 @@ color: rgb(133, 200, 255);
 .datos p {
     margin: 0.5em 0;
     line-height: 1.4;
+    color: rgb(192, 192, 192);
 }
 
 .pkmn-types {
     display: flex;
     justify-content: center;
     gap: 1em;
-    margin: 1em 0;
+    margin: -1.5em 0 1em 0;
 }
 
 .pkmnstats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
-    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
 }
 
-.pkmnstats p {
-    background-color: rgba(113, 179, 241, 0.1);
-    padding: 0.5em;
-    border-radius: 5px;
-    border: 1px solid rgb(113, 179, 241);
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-name {
+    min-width: 90px;
+    font-weight: bold;
+    color: rgb(113, 179, 241);
+}
+
+.stat-bar-container {
+    flex-grow: 1;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    background-color: rgb(113, 179, 241);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+
+.stat-value {
+    min-width: 35px;
+    text-align: right;
+    color: rgb(113, 179, 241);
 }
 
 .pkmndescription {
