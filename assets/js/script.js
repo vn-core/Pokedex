@@ -185,6 +185,11 @@ form.addEventListener('submit', (event) => {
     // Si es un número, usar limitPokemonId, si no, usar el término directamente
     const pokemonId = !isNaN(searchTerm) ? limitPokemonId(Number(searchTerm)) : searchTerm;
     
+    // Actualizar currentPokemonId si la búsqueda fue exitosa
+    if (!isNaN(pokemonId)) {
+        currentPokemonId = pokemonId;
+    }
+    
     renderPokemon(pokemonId);
     input.value = '';
 });
