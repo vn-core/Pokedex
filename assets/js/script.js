@@ -250,4 +250,25 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelector('.btn-next').addEventListener('click', nextPokemon);
 document.querySelector('.btn-prev').addEventListener('click', prevPokemon);
 
+// Scroll indicator logic
+const scrollIndicator = document.querySelector('.scroll-indicator');
+const container = document.querySelector('.container');
+
+if (scrollIndicator && container) {
+    container.addEventListener('scroll', () => {
+        const scrollPosition = container.scrollLeft;
+        const containerWidth = container.clientWidth;
+        const scrollWidth = container.scrollWidth;
+        
+        // Si estamos más allá de la mitad del scroll, mostrar flecha hacia la izquierda
+        if (scrollPosition > containerWidth / 2) {
+            scrollIndicator.textContent = '<<';
+            scrollIndicator.classList.add('left');
+        } else {
+            scrollIndicator.textContent = '>>';
+            scrollIndicator.classList.remove('left');
+        }
+    });
+}
+
 

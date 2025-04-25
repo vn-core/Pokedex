@@ -10,10 +10,14 @@ body{
 
 .container{
     display: flex;
-    width: 100vw; /* 100% del ancho de la ventana visible */
-    height: 100vh; /* 100% del alto de la ventana visible */
+    width: 100vw; 
+    height: 100vh; 
     justify-content: left;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
 }
 
 .pokedex{
@@ -25,18 +29,18 @@ body{
     position: relative;
     object-fit: contain;
     margin-left: 2em;
-   
-
+    scroll-snap-align: start;
+    flex-shrink: 0;
 }
 
 .pokemonimg{
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute; /* Permite posicionar libremente */
+    position: absolute; 
     object-fit: contain;
     width: 7em;
-    height: 8em; /* Asegúrate de que ocupe todo el contenedor */
+    height: 8em; 
     z-index:3;
     padding-top: 8em;
     
@@ -121,7 +125,8 @@ color: rgb(133, 200, 255);
     border: 5px solid rgb(113, 179, 241);
     box-shadow: 0 0 15px rgba(113, 179, 241, 0.3);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-   
+    scroll-snap-align: start;
+    flex-shrink: 0;
 }
 
 .datos h2 {
@@ -200,4 +205,75 @@ color: rgb(133, 200, 255);
 
 .pkmntype-img{
     height: 5em;
+}
+
+.scroll-indicator {
+    display: none;
+    position: absolute;
+    bottom: 0.1em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2.5em;
+    animation: bounce 1s infinite;
+    z-index: 10;
+    text-shadow: 0 0 5px rgba(113, 179, 241, 0.5);
+}
+
+.scroll-indicator.left {
+    animation: bounceLeft 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+@keyframes bounceLeft {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        justify-content: flex-start;
+        padding: 1em;
+        align-items: flex-start;
+        padding-top: 1.5em;
+    }
+
+    .pokedex {
+        margin-left: 0;
+        width: 100%;
+        max-width: 30em;
+        margin-top: -0.5em;
+    }
+
+    .datos {
+        margin-left: 1em;
+        width: 100%;
+        max-width: 20em;
+        padding: 1.5em;
+        margin-top: -0.5em;
+    }
+
+    .pkmn-types {
+        margin: -1em 0 0.5em 0;
+    }
+
+    .pkmntype-img {
+        height: 4em;
+    }
+
+    .scroll-indicator {
+        display: block;
+    }
 }
