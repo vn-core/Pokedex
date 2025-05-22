@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PokemonInfo from './PokemonInfo';
 import './Pokedex.css';
 
@@ -8,6 +8,7 @@ const Pokedex = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const audioRef = useRef(new Audio());
     const totalPokemons = 649;
 
     const fetchPokemonData = async (pokemon) => {
@@ -53,9 +54,30 @@ const Pokedex = () => {
         }
     };
 
+    const playPokemonSound = () => {
+        if (!pokemonData) return;
+        
+        // Detener cualquier sonido que esté reproduciéndose
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        
+        // Configurar y reproducir el nuevo sonido
+        audioRef.current.src = `https://pokedex-api-sounds.onrender.com/sound/${pokemonData.id}`;
+        audioRef.current.play().catch(error => {
+            console.error('Error al reproducir el sonido:', error);
+        });
+    };
+
     useEffect(() => {
         fetchPokemonData(currentPokemonId);
     }, [currentPokemonId]);
+
+    useEffect(() => {
+        return () => {
+            audioRef.current.pause();
+            audioRef.current = null;
+        };
+    }, []);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -90,6 +112,8 @@ const Pokedex = () => {
                             className="pokemonimg" 
                             src={pokemonData.spriteUrl}
                             alt={pokemonData.name}
+                            onClick={playPokemonSound}
+                            style={{ cursor: 'pointer' }}
                             onError={(e) => {
                                 console.error('Error loading Pokemon image');
                                 e.target.onerror = null;
